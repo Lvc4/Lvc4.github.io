@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Galois-Feld Rechner</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <h2>Galois-Feld Rechner</h2>
+            
+            <label for="irreduciblePoly">Irreduzibles Polynom (Hex):</label>
+            <input type="text" id="irreduciblePoly" value="11B" placeholder="z.B. 11B">
+            <div id="tooltip" class="tooltip">
+                <p>Das irreduzible Polynom für AES (GF(2^8))</p>
+            </div>
+
+            <label for="polyA">Polynom A (Hex):</label>
+            <input type="text" id="polyA" value="AD" placeholder="z.B. AD">
+
+            <label for="polyB">Polynom B (Hex):</label>
+            <input type="text" id="polyB" value="B4" placeholder="z.B. B4">
+
+            <button onclick="calculate()">Berechnen</button>
+
+            <div id="result" class="result"></div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
