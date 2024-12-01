@@ -23,6 +23,13 @@
             <label for="polyB">Polynom B (Hex):</label>
             <input type="text" id="polyB" value="B4" placeholder="z.B. B4">
 
+            <!-- Dropdown-Menü für Operation auswählen -->
+            <label for="operation">Operation auswählen:</label>
+            <select id="operation">
+                <option value="multiply">Multiplikation</option>
+                <option value="add">Addition</option>
+            </select>
+
             <button onclick="calculate()">Berechnen</button>
 
             <div id="result" class="result"></div>

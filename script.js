@@ -15,21 +15,32 @@ function galoisMultiply(a, b, irreduciblePoly) {
     return result;
 }
 
+function galoisAdd(a, b) {
+    return a ^ b;
+}
+
 function calculate() {
     const polyA = document.getElementById('polyA').value.trim();
     const polyB = document.getElementById('polyB').value.trim();
     const irreduciblePoly = document.getElementById('irreduciblePoly').value.trim();
-
+    
     const a = parseInt(polyA, 16);
     const b = parseInt(polyB, 16);
     const irreducible = parseInt(irreduciblePoly, 16);
-
+    
     if (isNaN(a) || isNaN(b) || isNaN(irreducible)) {
         alert("Bitte gültige Hex-Werte eingeben.");
         return;
     }
-
-    const result = galoisMultiply(a, b, irreducible);
+    
+    const operation = document.getElementById('operation').value;
+    
+    let result;
+    if (operation === 'multiply') {
+        result = galoisMultiply(a, b, irreducible);
+    } else if (operation === 'add') {
+        result = galoisAdd(a, b);
+    }
 
     const hexResult = '0x' + result.toString(16).toUpperCase();
 
@@ -63,12 +74,12 @@ const tooltip = document.getElementById('tooltip');
 irreducibleInput.addEventListener('mouseenter', () => {
     tooltipTimer = setTimeout(() => {
         tooltip.style.display = 'block';
-    }, 700);
+    }, 500);
 });
 
 irreducibleInput.addEventListener('mousemove', (e) => {
     tooltip.style.left = e.pageX + 15 + 'px';
-    tooltip.style.top = e.pageY + 15 + 'px'; 
+    tooltip.style.top = e.pageY + 15 + 'px';
 });
 
 irreducibleInput.addEventListener('mouseleave', () => {
