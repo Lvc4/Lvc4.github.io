@@ -2,13 +2,14 @@ let tooltipTimer;
 
 function galoisMultiply(a, b, irreduciblePoly) {
     let result = 0;
+    const irreducibleDegree = getDegree(irreduciblePoly);
     while (b > 0) {
         if (b & 1) {
             result ^= a;
         }
         b >>= 1;
         a <<= 1;
-        if (a >= 256) {
+        if (getDegree(a) >= irreducibleDegree) {
             a ^= irreduciblePoly;
         }
     }
@@ -17,6 +18,24 @@ function galoisMultiply(a, b, irreduciblePoly) {
 
 function galoisAdd(a, b) {
     return a ^ b;
+}
+
+function getDegree(poly) {
+    let degree = 0;
+    while (poly > 0) {
+        poly >>= 1;
+        degree++;
+    }
+    return degree - 1;
+}
+
+function modReduce(value, irreduciblePoly) {
+    const irreducibleDegree = getDegree(irreduciblePoly);
+    while (getDegree(value) >= irreducibleDegree) {
+        const shiftAmount = getDegree(value) - irreducibleDegree;
+        value ^= irreduciblePoly << shiftAmount;
+    }
+    return value;
 }
 
 function validateHex(value) {
@@ -65,13 +84,22 @@ function calculate() {
     const b = parseInt(polyB, 16);
     const irreducible = parseInt(irreduciblePoly, 16);
     
+    if (isNaN(a) || isNaN(b) || isNaN(irreducible)) {
+        alert("Bitte gültige Hex-Werte eingeben.");
+        return;
+    }
+
+    // Reduzierung von A und B
+    const reducedA = modReduce(a, irreducible);
+    const reducedB = modReduce(b, irreducible);
+
     const operation = document.getElementById('operation').value;
     let result;
 
     if (operation === 'multiply') {
-        result = galoisMultiply(a, b, irreducible);
+        result = galoisMultiply(reducedA, reducedB, irreducible);
     } else if (operation === 'add') {
-        result = galoisAdd(a, b);
+        result = galoisAdd(reducedA, reducedB);
     }
 
     const hexResult = '0x' + result.toString(16).toUpperCase();
