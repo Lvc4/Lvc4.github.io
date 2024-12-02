@@ -119,3 +119,21 @@ input[type="text"] {
         font-size: 0.9rem;
     }
 }
+
+#counter {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #444;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+#counter img {
+    display: block;
+    margin: 0 auto;
+    border: none;
+}
