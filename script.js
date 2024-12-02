@@ -19,6 +19,43 @@ function galoisAdd(a, b) {
     return a ^ b;
 }
 
+function validateHex(value) {
+    const hexRegex = /^[0-9A-Fa-f]+$/;
+    return hexRegex.test(value);
+}
+
+function validateInputsAndCalculate() {
+    const irreduciblePoly = document.getElementById('irreduciblePoly').value.trim();
+    const polyA = document.getElementById('polyA').value.trim();
+    const polyB = document.getElementById('polyB').value.trim();
+
+    let valid = true;
+
+    // Clear previous errors
+    document.getElementById('irreduciblePolyError').textContent = '';
+    document.getElementById('polyAError').textContent = '';
+    document.getElementById('polyBError').textContent = '';
+
+    if (!validateHex(irreduciblePoly)) {
+        document.getElementById('irreduciblePolyError').textContent = 'Ungültiger Hex-Wert.';
+        valid = false;
+    }
+
+    if (!validateHex(polyA)) {
+        document.getElementById('polyAError').textContent = 'Ungültiger Hex-Wert.';
+        valid = false;
+    }
+
+    if (!validateHex(polyB)) {
+        document.getElementById('polyBError').textContent = 'Ungültiger Hex-Wert.';
+        valid = false;
+    }
+
+    if (valid) {
+        calculate();
+    }
+}
+
 function calculate() {
     const polyA = document.getElementById('polyA').value.trim();
     const polyB = document.getElementById('polyB').value.trim();
@@ -28,14 +65,9 @@ function calculate() {
     const b = parseInt(polyB, 16);
     const irreducible = parseInt(irreduciblePoly, 16);
     
-    if (isNaN(a) || isNaN(b) || isNaN(irreducible)) {
-        alert("Bitte gültige Hex-Werte eingeben.");
-        return;
-    }
-    
     const operation = document.getElementById('operation').value;
-    
     let result;
+
     if (operation === 'multiply') {
         result = galoisMultiply(a, b, irreducible);
     } else if (operation === 'add') {
@@ -43,7 +75,6 @@ function calculate() {
     }
 
     const hexResult = '0x' + result.toString(16).toUpperCase();
-
     const polyResult = toPolynomial(result);
 
     document.getElementById('result').innerHTML = `

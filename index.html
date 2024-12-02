@@ -13,29 +13,31 @@
             
             <label for="irreduciblePoly">Irreduzibles Polynom (Hex):</label>
             <input type="text" id="irreduciblePoly" value="11B" placeholder="z.B. 11B">
+            <div class="error" id="irreduciblePolyError"></div>
             <div id="tooltip" class="tooltip">
                 <p>Das irreduzible Polynom für AES (GF(2^8))</p>
             </div>
 
             <label for="polyA">Polynom A (Hex):</label>
             <input type="text" id="polyA" value="AD" placeholder="z.B. AD">
+            <div class="error" id="polyAError"></div>
 
             <label for="polyB">Polynom B (Hex):</label>
             <input type="text" id="polyB" value="B4" placeholder="z.B. B4">
+            <div class="error" id="polyBError"></div>
 
-            <!-- Dropdown-Menü für Operation auswählen -->
             <label for="operation">Operation auswählen:</label>
             <select id="operation">
                 <option value="multiply">Multiplikation</option>
                 <option value="add">Addition</option>
             </select>
 
-            <button onclick="calculate()">Berechnen</button>
+            <button onclick="validateInputsAndCalculate()">Berechnen</button>
 
             <div id="result" class="result"></div>
         </div>
 
-        <div id="counter" style="position: fixed; bottom: 10px; right: 10px; font-family: Arial, sans-serif; font-size: 0.9rem; color: #666;">
+        <div id="counter">
             <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Flvc4.github.io%2F&label=Visitors&countColor=%23263759" alt="Views Counter">
         </div>
 

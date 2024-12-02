@@ -137,3 +137,10 @@ input[type="text"] {
     margin: 0 auto;
     border: none;
 }
+
+.error {
+    color: red;
+    font-size: 0.85rem;
+    margin-top: -8px;
+    margin-bottom: 10px;
+}
